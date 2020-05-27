@@ -1,4 +1,4 @@
-package study.Algorithm;
+package study.SORT;
 
 public class QuickSort {
     public static void main(String[] args) {
