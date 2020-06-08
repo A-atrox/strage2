@@ -18,6 +18,7 @@ public class NameCheck {
      * @修改人和其它信息
      */
     // 1.核心while循环,如果字符一样则两个指针都加一,如果不一样,则长按键字符指针加1;
+    //
     //2.最后判断p1是否等于name的长度即可;
     //3.完结。
     public static boolean isLongPressedName(String name, String typed) {
