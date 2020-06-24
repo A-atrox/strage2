@@ -1,9 +1,8 @@
-package study.Algorithm;
+package study.algorithm;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.TreeMap;
 
 import static java.lang.Math.max;
 
