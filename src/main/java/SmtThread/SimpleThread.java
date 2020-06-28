@@ -11,14 +11,16 @@ import java.util.Date;
 public class SimpleThread extends Thread {
 
     private long mills = 10000L;
+    private int times = 10;
     Date endDate = new Date(System.currentTimeMillis() + mills);
     long endTime = endDate.getTime();
 
     @Override
     public void run() {
         while (true) {
-            System.out.println("倒计时");
+            System.out.println("倒计时"+times+"s");
             endDate = new Date(endDate.getTime() - 1000);
+            times--;
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
