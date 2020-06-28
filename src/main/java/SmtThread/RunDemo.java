@@ -33,6 +33,7 @@ public class RunDemo {
 //        }
         // 第二种实现方式,高并发下可以保证任务只被执行一次
         FutureTask<Integer> futureTask = new FutureTask<>(task);
+        //FutureTask能够在⾼并发环境下确保任务只执⾏⼀次
         service.submit(futureTask);
         try {
             System.out.println(futureTask.get(1500,TimeUnit.MILLISECONDS));
