@@ -22,14 +22,14 @@ public class ShutDownDemo {
     // 这样写可以规避资源耗尽的风险
     private  static ScheduledExecutorService service =
         new ScheduledThreadPoolExecutor(3,new BasicThreadFactory.Builder().namingPattern("example-schedule-pool-%d").daemon(true).build());
-
+    private  static  ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(3,10,5,TimeUnit.MILLISECONDS,null);
     public static void main(String[] args) throws  Exception{
-
+//        threadPoolExecutor
         for (int i = 0; i < 10; i++) {
             service.submit(()->{
                 System.out.println(Thread.currentThread().getName()+"正在执行任务");
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(100);// 这里模拟任务调用
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
