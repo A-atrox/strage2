@@ -1,4 +1,4 @@
-package SmtThread;
+package smt.thread;
 
 /**
  * @author guoyf

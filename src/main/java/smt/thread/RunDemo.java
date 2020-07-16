@@ -1,6 +1,4 @@
-package SmtThread;
-
-import org.apache.poi.hssf.record.common.FutureRecord;
+package smt.thread;
 
 import java.util.concurrent.*;
 
