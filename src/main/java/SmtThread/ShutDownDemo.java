@@ -20,7 +20,7 @@ public class ShutDownDemo {
 //newSingleThreadExecutor 创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。
 
     // 这样写可以规避资源耗尽的风险
-    private  static ScheduledExecutorService service =
+    private  static ExecutorService service =
         new ScheduledThreadPoolExecutor(3,new BasicThreadFactory.Builder().namingPattern("example-schedule-pool-%d").daemon(true).build());
     private  static  ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(3,10,5,TimeUnit.MILLISECONDS,null);
     public static void main(String[] args) throws  Exception{

@@ -11,6 +11,8 @@ import java.util.concurrent.*;
  */
 public class RunDemo {
     public static void main(String[] args) {
+        Thread t1 = new Thread();
+        t1.setDaemon(true);
 //        System.out.println("多线程创建");
 //        SimpleRunnable s1 = new SimpleRunnable();
 //        SimpleRunnable s2 = new SimpleRunnable();
