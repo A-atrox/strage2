@@ -1,4 +1,4 @@
-package smt.thread;
+package smt.thread.threadDemo;
 
 /**
  * @author guoyf

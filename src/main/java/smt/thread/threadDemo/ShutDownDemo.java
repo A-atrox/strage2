@@ -1,4 +1,4 @@
-package smt.thread;
+package smt.thread.threadDemo;
 
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 

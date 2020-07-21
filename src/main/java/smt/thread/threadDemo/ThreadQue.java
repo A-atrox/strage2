@@ -1,4 +1,4 @@
-package smt.thread;
+package smt.thread.threadDemo;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 

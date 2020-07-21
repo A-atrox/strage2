@@ -1,6 +1,5 @@
-package smt.thread;
+package smt.thread.threadDemo;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
