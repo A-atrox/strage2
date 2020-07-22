@@ -69,11 +69,12 @@ public class ReentrantDemo {
         }
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws InterruptedException {
         ReentrantDemo r1 = new ReentrantDemo();
         new Thread(()->{
-            System.out.println(r1.getTask());
+            System.out.println(r1.getTask()+"已得到");
         }).start();
+        Thread.sleep(1000);
         new Thread(()->{
             r1.addTask("第一个任务");
         }).start();
