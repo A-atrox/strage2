@@ -1,5 +1,6 @@
 package smt.reflect;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -25,6 +26,10 @@ public class ReflecDemo {
             Field[] fields  = clazz.getDeclaredFields();
             for(Field f:fields){
                 System.out.println(f);
+            }
+            Annotation[] annotations = clazz.getAnnotations();
+            for(Annotation a:annotations){
+                System.out.println(a);
             }
             Constructor c = clazz.getDeclaredConstructor(String.class,String.class,String.class,double.class,int.class);
             Brand b1 = (Brand) c.newInstance("NO.1","小米","/url/image",1.0,10);

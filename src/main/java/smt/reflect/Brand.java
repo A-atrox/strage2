@@ -2,13 +2,15 @@ package smt.reflect;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author guoyf
  * @Date 2020/8/10
  * @describe
  */
-@Component
+@Component(value = "brand")
+@RestController
 @Data
 public class Brand {
     private String id;
