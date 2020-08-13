@@ -12,4 +12,6 @@ import java.lang.annotation.*;
 @Documented
 @Inherited
 public @interface demoAnn {
+    public SexEnum sex() default SexEnum.MAN;
+    public int age() default 22;
 }
