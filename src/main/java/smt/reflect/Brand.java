@@ -3,6 +3,8 @@ package smt.reflect;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RestController;
+import smt.annotation.SexEnum;
+import smt.annotation.demoAnn;
 
 /**
  * @author guoyf
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Component(value = "brand")
 @RestController
 @Data
+@demoAnn(sex = SexEnum.WOMEN,age = 10)
 public class Brand {
     private String id;
     private String name;
