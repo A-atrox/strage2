@@ -61,7 +61,35 @@ public class StreamTest {
         /***
          * Stream 流的 filter 使用
          */
+        List<String> list7 = Arrays.asList("张三", "李四", "王五", "xuwujing");
+        String result3 = list7.stream().filter(s -> "李四".equals(s)).findAny().orElse("找不到!");
+        String result4 = list7.stream().filter(s -> "李二".equals(s)).findAny().orElse("找不到!");
 
+        System.out.println("stream 过滤之后 2:" + result3);
+        System.out.println("stream 过滤之后 3:" + result4);
 
+        List<User> lists = new ArrayList<User>();
+        lists.add(new User(6, "张三"));
+        lists.add(new User(2, "李四"));
+        lists.add(new User(3, "王五"));
+        lists.add(new User(1, "张三"));
+        int sum = lists.stream().filter(user -> "张三".equals(user.getName())).mapToInt(user->user.getId()).sum();
+        System.out.println(sum);
+    }
+}
+class User{
+    private int id;
+    private String name;
+    User(int id,String name){
+        this.id = id;
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
     }
 }
