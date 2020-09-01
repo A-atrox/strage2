@@ -1,6 +1,10 @@
 package Java8;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -34,16 +38,16 @@ public class StreamTest {
         List<String> list2 = Arrays.asList(strArray);
         stream = list2.stream();
         /***
-         * Stream 流的之间的转换
+         * Stream 流的之间的转换   JAVA8中流不能被重用一旦它被使用流将被关闭
          */
         // 流转array
         Stream<String> stream2 = Stream.of("a", "b", "c");
-        String[] st1 = stream2.toArray(String[]::new);
+//        String[] st1 = stream2.toArray(String[]::new);
         // 转换成 Collection
-        List<String> list1 = stream2.collect(Collectors.toList());
-        List<String> list3 = stream2.collect(Collectors.toCollection(ArrayList::new));
-        Set set1 = stream2.collect(Collectors.toSet());
-        Stack stack = stream2.collect(Collectors.toCollection(Stack::new));
+//        List<String> list1 = stream2.collect(Collectors.toList());
+//        List<String> list3 = stream2.collect(Collectors.toCollection(ArrayList::new));
+//        Set set1 = stream2.collect(Collectors.toSet());
+//        Stack stack = stream2.collect(Collectors.toCollection(Stack::new));
         // 转换成String
         String str = stream.collect(Collectors.joining()).toString();
         /***
@@ -103,9 +107,9 @@ public class StreamTest {
         /***
          * 多线程异步任务的一种实现。
          */
-        long count =list5.parallelStream().filter(v->{
+        long count = list5.parallelStream().filter(v -> {
             System.out.println(Thread.currentThread().getName());
-            return  v>3;
+            return v > 3;
         }).count();
         System.out.println(count);
 
@@ -117,13 +121,79 @@ public class StreamTest {
         String lines = "good good study day day up";
         List<String> list14 = new ArrayList<String>();
         list14.add(lines);
-        List<String> list10 = list14.stream().flatMap(line->Stream.of(line.split("")))
+        List<String> list10 = list14.stream().flatMap(line -> Stream.of(line.split("")))
                 .map(String::toLowerCase).distinct().sorted().collect(Collectors.toList());
         System.out.println(list10);
 
+        /***
+         * Match
+         */
+        boolean all = list.stream().allMatch(v -> v > 3);
+        System.out.println("是否都大于3" + all);
+        boolean any = list.stream().anyMatch(v -> v > 3);
+        System.out.println("是否有1个大于3" + any);
+        boolean none = list.stream().noneMatch(v -> v > 7);
+        System.out.println("是否没有1个大于7的" + none);
+
+        /***
+         * reduce使用
+         */
+        String concat = Stream.of("A", "B", "C", "D").reduce("", String::concat);
+        System.out.println("字符串拼接:" + concat);
+
+        double minValue = Stream.of(-4.0, 1.0, 3.0, -2.0).reduce(Double.MAX_VALUE, Double::min);
+        System.out.println("最小值:" + minValue);
+
+        int sumValue = Stream.of(1, 2, 3, 4).reduce(Integer::sum).get();
+        System.out.println("无起始值求和:" + sumValue);
+
+        sumValue = Stream.of(1, 2, 3, 4).reduce(1, Integer::sum);
+        System.out.println("有起始值求和:" + sumValue);
+
+        concat = Stream.of("a", "B", "c", "D", "e", "F").filter(x -> x.compareTo("Z") > 0).reduce("", String::concat);
+        System.out.println("过滤和字符串连接:" + concat);
+
+        System.out.println("从2开始生成一个等差队列:");
+        Stream.iterate(2, n -> n + 2).limit(5).forEach(x -> System.out.print(x + " "));
+
+        System.out.println("自定义一个流进行计算输出:");
+        Stream.generate(new UserSupplier()).limit(2).forEach(u -> System.out.println(u.getId() + ", " + u.getName()));
+
+        List<Integer> numbers = Arrays.asList(1, 5, 7, 3, 9);
+        IntSummaryStatistics stats = numbers.stream().mapToInt((x) -> x).summaryStatistics();
+        System.out.println("列表中最大的数 : " + stats.getMax());
+        System.out.println("列表中最小的数 : " + stats.getMin());
+        System.out.println("所有数之和 : " + stats.getSum());
+        System.out.println("平均数 : " + stats.getAverage());
+
+        //本地日期,不包括时分秒
+        LocalDate nowDate = LocalDate.now();
+        //本地日期,包括时分秒
+        LocalDateTime nowDateTime = LocalDateTime.now();
+        System.out.println("当前时间:"+nowDate);
+        System.out.println("当前时间:"+nowDateTime);
+        //获取当前的时间，包括毫秒
+        LocalDateTime ldt = LocalDateTime.now();
+        System.out.println("当前年:"+ldt.getYear());
+        System.out.println("当前年份天数:"+ldt.getDayOfYear());
+        System.out.println("当前月:"+ldt.getMonthValue());
+        System.out.println("当前时:"+ldt.getHour());
+        System.out.println("当前分:"+ldt.getMinute());
+        System.out.println("当前时间:"+ldt.toString());
+
+        LocalDateTime ldt1 = LocalDateTime.now();
+        System.out.println("格式化时间: "+ ldt1.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")));
     }
 }
+class UserSupplier implements Supplier<User> {
+    private int index = 10;
+    private Random random = new Random();
 
+    @Override
+    public User get() {
+        return new User(index++, "pancm" + random.nextInt(10));
+    }
+}
 class User {
     private int id;
     private String name;
