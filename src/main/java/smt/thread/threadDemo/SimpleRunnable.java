@@ -20,11 +20,11 @@ public class SimpleRunnable implements Runnable {
             }
         }
 
-
     }
 
     public void sellTickets() {
-        synchronized (SimpleThread.class) {
+        synchronized (this) {
+//            synchronized (SimpleRunnable.class)  =  static synchronize  void method();
             if (tickets > 0) {
                 tickets--;
                 System.out.println(Thread.currentThread().getName() + "卖出第:" + (10 - tickets) + "张票"+"还剩下"+tickets+"张");
