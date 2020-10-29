@@ -1,14 +1,17 @@
 package smt.thread.lock;
 
-import study.lang.BoxClass.Test;
-
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
+/**
+ *@params  
+ *@return  
+ *@author  guoyf
+ *@Date  2020/10/13
+ */
 public class ReentrantDemo {
     private static Lock lock2 = new ReentrantLock();
     //Lock lock=new ReentrantLock(true);  //公平锁
